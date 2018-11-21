@@ -21,6 +21,7 @@ class ImmutableList {
 	virtual bool is_empty() = 0;
 	virtual T head() = 0;
 	virtual ImmutableList * tail() = 0;
+	int length() {return 0;} 
 };
 
 /*
