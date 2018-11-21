@@ -12,19 +12,16 @@
 
 namespace {
 
-	class TestTests: public ::testing::Test {
+	class TestList: public ::testing::Test {
 		protected:
-		TestTests();
-		~TestTests();
-	};
+		TestList();
+		~TestList();
+};
 	
-	TEST(FactorialTest, HandlesZeroInput) {
-			EXPECT_EQ(factorial(0), 1);
-		}
-	TEST(FactorialTest, NonZerpInput) {
-			ASSERT_EQ(factorial(3), 6);
-		}
-
+	TEST(list_init, non_empty) {
+		List<int> * int_list = new List<int>(1, new Nil<int>());
+		ASSERT_EQ(int_list->length(), 1);
+	}
 }
 int main(int argc, char **argv){
 	::testing::InitGoogleTest(&argc, argv);
