@@ -4,6 +4,7 @@
 
 
 #include <iostream>
+#include <string>
 #include <gtest/gtest.h>
 #include "list.h"
 #include "list_functions.cpp"
@@ -22,14 +23,14 @@ namespace {
 };
 	
 	TEST(testListConstructor, testList) {
-		List<int> * int_list = new List<int>(1, new Nil<int>());
+		ImmutableList<int> * int_list = new List<int>(1, new Nil<int>());
 		ASSERT_EQ(int_list->length(), 1);
 		ASSERT_TRUE( ! int_list->is_empty());
 	}
 	
 	TEST(testNlConstructor, testNil){
-		Nil<int> * empty_list = new Nil<int>();
-		List<int> * lst2 = new List<int>(3, new List<int>(4, new Nil<int>()));
+		ImmutableList<int> * empty_list = new Nil<int>();
+		ImmutableList<int> * lst2 = new List<int>(3, new List<int>(4, new Nil<int>()));
 		ASSERT_TRUE(empty_list->is_empty());
 		ASSERT_EQ(empty_list->length(), 0);
 		ASSERT_THROW(empty_list->head(), std::logic_error);
@@ -58,8 +59,20 @@ namespace {
 		ASSERT_EQ(cons(elem, ptr)->length(), 2);
 		ASSERT_EQ(cons(elem, new Nil<int>())->length(), 1);
 	}
+	
+	TEST(testNth, testList){
+		ImmutableList<int> * empty_list = new Nil<int>();
+		ImmutableList<int> * lst2 = new List<int>(3, new List<int>(4, new Nil<int>()));
+		ASSERT_EQ(nth(0, lst2), 3);
+		ASSERT_EQ(nth(1, lst2), 4);
+		ASSERT_THROW(nth(0, empty_list), std::out_of_range);// nth from epty
+		ASSERT_THROW(nth(2, lst2), std::out_of_range); // out of range
+		
+	}
+	
 }
 int main(int argc, char **argv){
 	::testing::InitGoogleTest(&argc, argv);
+	
 	return RUN_ALL_TESTS();
 }
