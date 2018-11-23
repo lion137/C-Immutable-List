@@ -3,7 +3,6 @@
 #ifndef IMMUTABLE_LIST_H
 #define IMMUTABLE_LIST_H
 
-#include "list.h"
 /*
  * Abstract class
  */ 

@@ -10,9 +10,20 @@
  * cons elem to the list, returns pointer to the new list
  */ 
 template <class T>
-List<T> * cons(T elem, ImmutableList<T> * list){
+ImmutableList<T> * cons(T elem, ImmutableList<T> * list){
 	return new List<T>(elem, list);
 	}
+
+/*
+ * create list from any array
+ */
+template <class T>
+ImmutableList<T> * List_init(T a [], int size){
+	ImmutableList<T> * lst = new Nil<T>();
+	for (T i = size - 1; i >= 0; i--)
+		lst = cons(a[i], lst);
+	return lst;
+}
 
 /*
  * nth element
@@ -39,4 +50,23 @@ std::ostream& operator<<(std::ostream &strm,  ImmutableList<T> * list) {
 	return strm << str;
 } 
 
+/*
+ * reverse list
+ */
+template <class T>
+ImmutableList<T> * reverse(ImmutableList<T> * list){
+	return _reverse(list, new Nil<T>());
+}
+
+/*
+ * reverse list helper
+ */
+template <class T>
+ImmutableList<T> * _reverse(ImmutableList<T> * lst1, ImmutableList<T> * lst2){
+	 if (lst1->is_empty())
+		return lst2;
+	 else
+		return _reverse(lst1->tail(), cons(lst1->head(), lst2));
+}
+ 
 #endif

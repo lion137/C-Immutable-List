@@ -24,7 +24,6 @@ class Nil: public ImmutableList<T> {
 		ImmutableList<T> * tail() {
 			throw std::logic_error("Tail of empty list!");
 		}
-		
 };
 
 #endif

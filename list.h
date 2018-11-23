@@ -15,16 +15,14 @@ class List: public ImmutableList<T> {
 	
 	int size = 1;
 	T first;
-	void * rest;
+	ImmutableList<T> * rest;
 	public:
 	
 	List(T _first, ImmutableList<T> * _tail){
 		first = _first;
 		rest = _tail;
 		size += _tail->length();
-		
 	}
-	
 	~List() {std::cout << "List class destructor";}
 	bool is_empty() { return false; }
 	
@@ -33,7 +31,7 @@ class List: public ImmutableList<T> {
 	}
 	
 	ImmutableList<T>* tail(){
-		return (List<T> *) rest;
+		return  rest; /* (List<T> *) */ 
 	}
 	
 	int length() {return size;}
